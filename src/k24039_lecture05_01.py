@@ -28,4 +28,5 @@ def lecture05_01():
 
     # 書き込み処理
     # implement me
+    app.write_img('output_images/lecture05_01_k24039.png')
 
