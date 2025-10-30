@@ -10,8 +10,8 @@ def lecture05_01():
 
     # 画像をローカル変数に保存
     google_img : cv2.Mat = cv2.imread('images/google.png')
-    capture_img : cv2.Mat = cv2.imread('images/camera_capture.png') # 動作テスト用なので提出時にこの行を消すこと
-    # capture_img : cv2.Mat = "implement me"
+    # capture_img : cv2.Mat = cv2.imread('images/camera_capture.png') # 動作テスト用なので提出時にこの行を消すこと
+    capture_img : cv2.Mat = app.get_img()
 
     g_hight, g_width, g_channel = google_img.shape
     c_hight, c_width, c_channel = capture_img.shape
@@ -23,9 +23,18 @@ def lecture05_01():
             g, b, r = google_img[y, x]
             # もし白色(255,255,255)だったら置き換える
             if (b, g, r) == (255, 255, 255):
+                if (g_hight > c_hight and g_width >= c_width):
+                    google_img[y + g_hight, x] = capture_img[y, x]
+                if (g_width > c_width and g_hight <= c_hight):
+                    google_img[y, x + g_width] = capture_img[y, x]
                 pass
                 #implement me
 
     # 書き込み処理
     # implement me
+    app.write_img('output_images/lecture05_01_k24039.png')
 
+if __name__ == "__main__":
+    app = MyVideoCapture()
+    # app.run()
+    # app.write_img()
